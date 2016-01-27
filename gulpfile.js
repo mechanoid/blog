@@ -19,12 +19,13 @@ var concat = require("gulp-concat");
 var postIncludeBuilder = require('./tasks/post-include-builder.js');
 var postViewBuilder = require('./tasks/post-view-builder.js');
 var frontMatter = require('gulp-front-matter');
-var rss = require('gulp-rss');
+var data = require('gulp-data');
+var RSS = require('rss');
 
 var config = {
 	env: "development",
 	dist: "dist",
-	remoteDist: "/blog/",
+	remoteDist: "/",
 	host: 'http://127.0.0.1:8080'
 };
 
@@ -147,36 +148,40 @@ gulp.task('enable-prod-env', function(cb) {
 });
 
 gulp.task('rss', function() {
-  gulp.files('./posts/*.md')  // Read input files
-    .pipe(frontMatter())      // Extract YAML Front-Matter
-    .pipe(rss(                // Generate RSS data
-      // Configuration
-      {
-        // How we deal with contextual data (typically Front-Matter)
-        properties: {
-          data:         'frontMatter',  // name of property containing the data, typically extracted front-matter
-          // Proparty names mapping
-          title:        'title',        // post's title (means plugin will read `file.frontMatter.title`, mandatory)
-          link:         'permalink',    // post's URL (mandatory)
-          description:  'description',  // post's description (optional)
-          author:       'author',       // post's author (optional)
-          date:         'date'         // post's publication date (mandatory, default = now)
-          // image:        'image'         // post's thumbnail (optional)
-        },
+	var feed = new RSS({
+		title: 'Relentless Development',
+		site_url: 'http://www.relentless-development.com/',
+		feed_url: 'http://www.relentless-development.com/feed.xml',
+		description: 'relentless thoughts on software development, software architecture and related stuff',
+		webMaster: 'falkhoppe81@gmail.com (Falk Hoppe)',
+		language: 'en' });
 
-        // Feed configuration
-        render:       'atom-1.0',                     // Feed type (atom-1.0 or rss-2.0)
-        title:        'My blog',                      // Feed title (mandatory)
-        description:  'My very own blog',             // Feed description (optional)
-        link:         'http://my.bl.og',              // Feed link (optional)
-        author:       { name: 'Nicolas Chambrier' },  // Blog's author (optional)
-        // etc…
-      }
+  return gulp.src('./posts/*.md')
+    .pipe(frontMatter())
+		.pipe(data(function(file) {
+			var post = file.frontMatter;
+			feed.item({
+				title: post.title,
+				description: post.tldr,
+				url: post.url,
+				date: post.date,
+				author: "Falk Hoppe"
+			});
 
-    ))
-    .pipe(gulp.dest('./public/feed.xml')) // Write output
+			return file;
+		}))
+    .pipe(concat('feed.xml'))
+		.pipe(data(function(file) {
+			file.contents = new Buffer(feed.xml());
+			return file;
+		}))
+    .pipe(gulp.dest(distPath));
 });
 
+gulp.task('copy-cname', function(cb) {
+	return gulp.src('CNAME')
+	.pipe(gulp.dest(distPath));
+});
 
 gulp.task('disable-prod-env', function(cb) {
 	config.env = config.envbak;
@@ -189,7 +194,7 @@ gulp.task('build', function(cb) {
 })
 
 gulp.task('build-release', function(cb) {
-	return gulpSequence('clean', 'post-include-mixins', 'asset-revisioning', 'enable-prod-env', 'templates', 'disable-prod-env', 'images')(cb);
+	return gulpSequence('clean', 'post-include-mixins', 'asset-revisioning', 'enable-prod-env', 'templates', 'disable-prod-env', 'images', 'copy-cname', 'rss')(cb);
 })
 
 gulp.task('default', ['build']);
@@ -200,5 +205,5 @@ gulp.task('watch', ['build'], function() {
 
 gulp.task('deploy', ['build-release'], function() {
   return gulp.src(distPath + '/**/*')
-    .pipe(ghPages());
+    .pipe(ghPages({ remoteUrl: "git@github.com:mechanoid/mechanoid.github.io.git", branch: "master" }));
 });

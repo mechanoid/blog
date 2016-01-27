@@ -26,6 +26,24 @@ mixin post(post, markdownInclude, isView, active)
       
       +#{markdownInclude}
       
+    if isView
+      | <div id="disqus_thread"></div>
+      | <script>
+      | var disqus_config = function () {
+      |   this.page.url = "http://www.relentless-development.com/#{markdownInclude}.html";
+      |   this.page.identifier = "#{markdownInclude}";
+      | };
+      | 
+      | (function() { // DON'T EDIT BELOW THIS LINE
+      | var d = document, s = d.createElement('script');
+      | s.src = '//relentlessdevelopment.disqus.com/embed.js';
+      | s.setAttribute('data-timestamp', +new Date());
+      | (d.head || d.body).appendChild(s);
+      | })();
+      | </script>
+      | <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+          
+      
     footer.post-footer
       nav.post-nav 
         button.open.fa.fa-info(title="information")
