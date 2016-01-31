@@ -1,15 +1,18 @@
 @require './_nav-*'
 
 .nav
-  position fixed
-  top 0
-  bottom 0
-  left 100%
   background-color #fff
   width 100%
-  z-index 999
-  -webkit-transform-style preserve-3d
-  -webkit-overflow-scrolling touch
+
+  .js &
+    position fixed
+    top 0
+    bottom 0
+    left 100%
+    z-index 999
+    -webkit-transform-style preserve-3d
+    -webkit-overflow-scrolling touch
+
 
   &.active
     animation nav-slide 0.2s forwards;
@@ -21,10 +24,14 @@
       animation nav-slide-tablet 0.2s forwards;
 
 
-.nav-close, .nav-toggle, .nav-rss, .nav-twitter
-  position absolute
-  border none
-  outline none
+.nav-close
+  display none
+
+.js &
+  .nav-close, .nav-toggle, .nav-rss, .nav-twitter
+    position absolute
+    border none
+    outline none
 
 .nav
   .nav-rss, .nav-twitter

@@ -36,6 +36,9 @@ xhero-banner-bg = pearl-black
     order: -1;
     margin-bottom 3rem
 
+  .brand.in-hero-banner
+    display none
+
 .js .rlb .hero-banner
     position fixed
     top 0
@@ -58,7 +61,15 @@ xhero-banner-bg = pearl-black
       +desktop()
         left 10%
         right 10%
-        font-size 1vw
+
+      .headline-primary
+        +tablet()
+          font-size 5vw
+      //
+      //   +desktop()
+      //     left 10%
+      //     right 10%
+
 
     .brand.in-hero-banner
       +desktop()
