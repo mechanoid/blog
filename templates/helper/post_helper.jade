@@ -46,9 +46,9 @@ mixin post(post, markdownInclude, isView, active)
       
     footer.post-footer
       nav.post-nav 
-        button.open.fa.fa-info(title="information")
+        button.open.fa.fa-info(title="information").tooltip.up
         ul.scroll-status
-        a(class="clipboard" title="article link" data-clipboard-text="#{host}/#{postPath}").copy-link.fa.fa-link
+        a(class="clipboard" title="copy link" data-clipboard-text="#{host}/#{postPath}").tooltip.up.copy-link.fa.fa-link
           
       .post-footer-content
         h3.headline-sub= post.title

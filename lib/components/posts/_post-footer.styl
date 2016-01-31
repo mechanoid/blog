@@ -52,9 +52,6 @@
     .scroll-status
       display inline
 
-      // +up-from-tablet()
-      //   display none
-
     .open, .copy-link
       display block
       position absolute
@@ -64,11 +61,25 @@
     .open
       left 1rem
 
+
+      &.tooltip.up:hover:after
+        left -.5rem
+        right auto
+        bottom 150%
+        transform translateX(0%)
+
+
     .copy-link
       right 1rem
       transform: translateY(30%);
       &:hover
         text-decoration none
+
+      &.tooltip.up:hover:after
+        right -.5rem
+        left auto
+        bottom 150%
+        transform translateX(0%)
 
   .post-footer.active
     .post-footer-content

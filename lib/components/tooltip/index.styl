@@ -1,0 +1,36 @@
+.tooltip
+  &:hover:after
+    content attr(title)
+    white-space nowrap
+    z-index 9999
+
+    position absolute
+
+    background-color #323232
+    color #fff
+    padding .5rem 1rem
+    text-transform lowercase
+    font-size .6rem
+    border-radius 3px
+
+
+  &.left:hover:after, &.right:hover:after
+    top 50%
+    transform translateY(-30%)
+
+  &.left:hover:after
+    right 100%
+
+  &.right:hover:after
+    left 100%
+
+
+  &.bottom:hover:after, &.up:hover:after
+    left 50%
+    transform translateX(-50%)
+
+  &.bottom:hover:after
+    top 100%
+
+  &.up:hover:after
+    bottom 100%

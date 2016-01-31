@@ -16,7 +16,6 @@
 
 .nav-close, .nav-toggle, .nav-rss, .nav-twitter
   position absolute
-  z-index 1000
   border none
   outline none
 
@@ -31,6 +30,9 @@
     text-align center
     padding-top 1.5rem
     padding-bottom .5rem
+
+    &.tooltip:hover:after
+      right 80%
 
     &:hover
       color link-hover
