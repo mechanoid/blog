@@ -17,6 +17,8 @@
     "gulp-data": "^1.2.1",
     "gulp-front-matter": "^1.3.0",
     "gulp-gh-pages": "^0.5.4",
+    "gulp-gzip": "^1.2.0",
+    "gulp-image-optimization": "^0.1.3",
     "gulp-jade": "^1.1.0",
     "gulp-plumber": "^1.0.1",
     "gulp-replace": "^0.5.4",

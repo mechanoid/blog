@@ -22,7 +22,8 @@ var frontMatter = require('gulp-front-matter');
 var data = require('gulp-data');
 var RSS = require('rss');
 var sitemap = require('gulp-sitemap');
-
+var imageop = require('gulp-image-optimization');
+var gzip = require('gulp-gzip');
 var config = {
 	env: "development",
 	dist: "dist",
@@ -99,6 +100,11 @@ gulp.task('templates', ['article-pages'], function() {
 
 gulp.task('images', function() {
   return gulp.src(['./assets/images/**/*'])
+		.pipe(imageop({
+	    optimizationLevel: 5,
+	    progressive: true,
+    	interlaced: true
+    }))
     .pipe(gulp.dest(assetPath + '/images'));
 });
 
@@ -110,6 +116,12 @@ gulp.task('scripts', function() {
 	, './node_modules/hammerjs/hammer.js'
 	])
   .pipe(gulp.dest(assetPath + '/javascripts'));
+});
+
+gulp.task('gzip', function() {
+  return gulp.src([assetPath + '/**/*.js', assetPath + '/**/*.css', distPath + '/**/*.html'])
+	.pipe(gzip())
+  .pipe(gulp.dest(assetPath));
 });
 
 gulp.task('asset-revisioning', ['styles', 'scripts'], function () {
@@ -203,7 +215,7 @@ gulp.task('build', function(cb) {
 })
 
 gulp.task('build-release', function(cb) {
-	return gulpSequence('clean', 'post-include-mixins', 'asset-revisioning', 'enable-prod-env', 'templates', 'disable-prod-env', 'images', 'copy-cname', 'rss', 'sitemap')(cb);
+	return gulpSequence('clean', 'post-include-mixins', 'asset-revisioning', 'gzip', 'enable-prod-env', 'templates', 'disable-prod-env', 'images', 'copy-cname', 'rss', 'sitemap')(cb);
 })
 
 gulp.task('default', ['build']);
