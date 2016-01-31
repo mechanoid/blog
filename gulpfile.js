@@ -21,6 +21,7 @@ var postViewBuilder = require('./tasks/post-view-builder.js');
 var frontMatter = require('gulp-front-matter');
 var data = require('gulp-data');
 var RSS = require('rss');
+var sitemap = require('gulp-sitemap');
 
 var config = {
 	env: "development",
@@ -178,6 +179,14 @@ gulp.task('rss', function() {
     .pipe(gulp.dest(distPath));
 });
 
+gulp.task('sitemap', function () {
+    gulp.src('dist/**/*.html')
+	    .pipe(sitemap({
+	        siteUrl: 'http://www.relentless-development.com/'
+	    }))
+	    .pipe(gulp.dest('./dist'));
+});
+
 gulp.task('copy-cname', function(cb) {
 	return gulp.src('CNAME')
 	.pipe(gulp.dest(distPath));
@@ -194,7 +203,7 @@ gulp.task('build', function(cb) {
 })
 
 gulp.task('build-release', function(cb) {
-	return gulpSequence('clean', 'post-include-mixins', 'asset-revisioning', 'enable-prod-env', 'templates', 'disable-prod-env', 'images', 'copy-cname', 'rss')(cb);
+	return gulpSequence('clean', 'post-include-mixins', 'asset-revisioning', 'enable-prod-env', 'templates', 'disable-prod-env', 'images', 'copy-cname', 'rss', 'sitemap')(cb);
 })
 
 gulp.task('default', ['build']);
