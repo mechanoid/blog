@@ -1,5 +1,6 @@
 include ../../tmp/post_include_mixins.jade
 include ../helper/post_helper.jade
+include ../helper/brand_helper.jade
 include ../helper/nav.jade
 
 extends ./frame.jade
@@ -9,6 +10,7 @@ block body
   
   .hero-banner-page
     main.rlb-content.hero-banner-content(id="rlb-main")
+      +brand-name()
       section.posts
         block content
           
@@ -17,6 +19,7 @@ block body
   
     // BG image from https://unsplash.com/photos/8mqOw4DBBSg
     header.hero-banner(style="background-image: url(assets/images/stars.jpg)")
+      +brand-name('in-hero-banner')
       .hero-banner-message
         h1.headline-primary relentless thoughts on software development,<br> software architecture<br> and related stuff
         p.headline-sub by Falk Hoppe

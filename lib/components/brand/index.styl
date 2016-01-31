@@ -1,0 +1,44 @@
+.brand
+  ft-brand()
+  font-size 0
+  background-color #fff
+  width 3rem
+  height 3rem
+  text-align center
+  position fixed
+  top 0
+  left 0
+  z-index 500
+
+  .brand-subline
+    display none
+
+  +desktop()
+    background-color transparent
+    color #000
+    width 35%
+    height auto
+    font-size 1.3rem
+    font-size 3vw
+    top 5rem
+    text-align right
+
+
+    .brand-subline
+      margin-top 1.2rem
+      line-height 1.5
+      ft-lato()
+      display block
+      font-size .9rem
+      font-weight 100
+
+  &:before
+    font-size 1rem
+    display inline-block
+    content 'Rd'
+    position relative
+    top 50%
+    transform translateY(-50%)
+
+    +desktop()
+      display none

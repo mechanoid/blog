@@ -12,7 +12,14 @@
   -webkit-overflow-scrolling touch
 
   &.active
-    animation: nav-slide 0.2s forwards;
+    animation nav-slide 0.2s forwards;
+
+    +tablet()
+      animation nav-slide-tablet 0.2s forwards;
+
+    +desktop()
+      animation nav-slide-tablet 0.2s forwards;
+
 
 .nav-close, .nav-toggle, .nav-rss, .nav-twitter
   position absolute
@@ -48,6 +55,7 @@
   top 1rem
   right 1rem
   background-color transparent
+  z-index 1001
 
 .nav-toggle
   right 100%
