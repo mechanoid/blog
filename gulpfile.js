@@ -192,11 +192,11 @@ gulp.task('rss', function() {
 });
 
 gulp.task('sitemap', function () {
-    gulp.src('dist/**/*.html')
-	    .pipe(sitemap({
-	        siteUrl: 'http://www.relentless-development.com/'
-	    }))
-	    .pipe(gulp.dest('./dist'));
+  return gulp.src('dist/**/*.html')
+    .pipe(sitemap({
+        siteUrl: 'http://www.relentless-development.com/'
+    }))
+    .pipe(gulp.dest('./dist'));
 });
 
 gulp.task('copy-cname', function(cb) {
@@ -224,7 +224,8 @@ gulp.task('watch', ['build'], function() {
   gulp.watch(watchPaths, ['build']);
 });
 
-gulp.task('deploy', ['build-release'], function() {
+// gulp.task('deploy', ['build-release'], function() {
+gulp.task('deploy', function() {
   return gulp.src(distPath + '/**/*')
     .pipe(ghPages({ remoteUrl: "git@github.com:mechanoid/mechanoid.github.io.git", branch: "master" }));
 });
