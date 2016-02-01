@@ -224,8 +224,7 @@ gulp.task('watch', ['build'], function() {
   gulp.watch(watchPaths, ['build']);
 });
 
-// gulp.task('deploy', ['build-release'], function() {
-gulp.task('deploy', function() {
+gulp.task('deploy', ['build-release'], function() {
   return gulp.src(distPath + '/**/*')
     .pipe(ghPages({ remoteUrl: "git@github.com:mechanoid/mechanoid.github.io.git", branch: "master" }));
 });
