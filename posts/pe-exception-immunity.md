@@ -6,14 +6,14 @@ author:
 title: Progressive Enhancement is no cure to JS exceptions
 date: 2016-01-10
 category: frontend architecture
-tldr: Progressive enhancement is not saving you from making errors, and your application may have major outages if you let them crawl into production, whether you want it to be true or not. Yes SPAs have this problem, because they naturally rely heavily on js, but so do modern progressively enhanced webapps. 
+tldr: Progressive enhancement is not saving you from making errors, and your application may have major outages if you let them crawl into production, whether you want it to be true or not. Yes SPAs have this problem, because they naturally rely heavily on js, but so do modern progressively enhanced webapps.
 ---
 
 ## Progressive Enhancement is not a cure to everything
 
 Since Single Page Apps came up, there is (for good and many reasons) a community discussing the disadvantages of SPAs and where they have failed.
 One big argument that is spread into each and every discussion about SPAs versus its older counterpart Progressive enhancement is
-the **white-page** nightmare and that single javascript errors can kick your page in the groins. Once you search for *progressive enhancement vs. single page app* and *white page* and similar you will find a bunch of articles, that buy in into this argument, like [here](https://www.leaseweb.com/labs/2013/07/10-very-good-reasons-to-stop-using-javascript/), [here](http://programmers.stackexchange.com/questions/237537/progressive-enhancement-vs-single-page-apps#comment546103_238021) and [here](https://www.christianheilmann.com/2011/12/28/on-single-page-apps/).
+the *white-page* nightmare and that single javascript errors can kick your page in the groins. Once you search for *progressive enhancement vs. single page app* and *white page* and similar you will find a bunch of articles, that buy in into this argument, like [here](https://www.leaseweb.com/labs/2013/07/10-very-good-reasons-to-stop-using-javascript/), [here](http://programmers.stackexchange.com/questions/237537/progressive-enhancement-vs-single-page-apps#comment546103_238021) and [here](https://www.christianheilmann.com/2011/12/28/on-single-page-apps/).
 I only gave it a quick shot, but you may find several maybe better examples for what i mean.
 
 Recently i saw this again in an awesome [article](https://www.smashingmagazine.com/2015/12/reimagining-single-page-applications-progressive-enhancement) about a clean and simple "alternative" for smaller pages, that want to have a SPA like behavior. In fact this blog uses some of this techniques, because i think it is really awesome and wanted to play with it (weather you like it or not 😋).
