@@ -6,7 +6,7 @@ author:
 title: Progressive Enhancement is no cure to JS exceptions
 date: 2016-01-10
 category: frontend architecture
-tldr: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+tldr: Progressive enhancement is not saving you from making errors, and your application may have major outages if you let them crawl into production, whether you want it to be true or not. Yes SPAs have this problem, because they naturally rely heavily on js, but so do modern progressively enhanced webapps. 
 ---
 
 ## Progressive Enhancement is not a cure to everything
