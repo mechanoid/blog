@@ -25,11 +25,19 @@ module.exports = function(opts) {
     this.push(file);
     callback();
   }, function(cb) {
-    var i, file, ctx = {};
+    var i, fls, file, ctx = {};
 
-    for(i = 0; i < files.length; i++) {
-      if(files.hasOwnProperty(i)) {
-        file = files[i];
+
+    fls = [].slice.call(files).sort(function(a,b) {
+      var a = new Date(a.frontMatter.date);
+      var b = new Date(b.frontMatter.date);
+
+      return a > b ? -1 : a<b ? 1 : 0;
+    });
+
+    for(i = 0; i < fls.length; i++) {
+      if(fls.hasOwnProperty(i)) {
+        file = fls[i];
         ctx[path.basename(file.path, '.md')] = file.frontMatter;
       }
     }

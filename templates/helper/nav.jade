@@ -1,6 +1,7 @@
-mixin main-nav
+mixin main-nav(current)
   +article-data
     - dateShortOptions = { weekday: "short", year: "numeric", month: "narrow" };
+    - homeActive = current === "posts" ? "active" : "";
     
     nav.main.nav
       button.nav-toggle.btn-primary.fa.fa-reorder
@@ -9,13 +10,14 @@ mixin main-nav
       a.tooltip.left.nav-twitter.fa.fa-twitter(href="http://www.twitter.com/nothing_box" title="twitter")
          
       ul.nav-list
-        li.nav-item.fa.fa-home
+        li.nav-item.fa.fa-home(class=homeActive)
           a.nav-link(href="/") Home
         each post, id in ctx
           - date = new Date(post.date)
           - shortDate = date.toLocaleDateString("en-US", dateOptions);
+          - postActive = current === id ? "active" : "";
           
-          li.nav-item.fa.fa-star
+          li.nav-item.fa.fa-star(class=postActive)
             a.nav-link(href="/#{id}.html")= post.title
             p.post-nav-meta
               span.post-date= shortDate
