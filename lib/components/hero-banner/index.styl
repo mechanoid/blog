@@ -85,18 +85,18 @@ xhero-banner-bg = pearl-black
 
 
 
-  .js .rlb
-    // anchor-"navigation" with default fallback page inspired by
-    // http://www.smashingmagazine.com/2015/12/reimagining-single-page-applications-progressive-enhancement/#the-default-view
-    .hero-banner-page > *:first-child
-      display none
+.js .rlb
+  // anchor-"navigation" with default fallback page inspired by
+  // http://www.smashingmagazine.com/2015/12/reimagining-single-page-applications-progressive-enhancement/#the-default-view
+  .hero-banner-page > *:first-child
+    display none
 
-    .hero-banner-page > *:last-child
-      display block
+  .hero-banner-page > *:last-child
+    display block
 
-    .hero-banner-page > *:target, .hero-banner-page > .selected-target
-      display block
-      animation: pulse 0.2s linear 1;
+  .hero-banner-page > *:target, .hero-banner-page > .selected-target
+    display block
+    animation: pulse 0.2s linear 1;
 
-    .hero-banner-page > *:target ~ *, .hero-banner-page > .selected-target ~ *
-      display none
+  .hero-banner-page > *:target ~ *, .hero-banner-page > .selected-target ~ *
+    display none
