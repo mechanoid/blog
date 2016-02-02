@@ -7,6 +7,7 @@ mixin post(post, markdownInclude, isView, active)
   - postPath = true ? markdownInclude + ".html" : markdownInclude
   - activeClass = active ? "active" : "not-active"
   - category = post.category || "software development"
+  - host = "http://www.relentless-development.com"
   
   +brand-name()
   +main-nav(markdownInclude)
@@ -37,7 +38,7 @@ mixin post(post, markdownInclude, isView, active)
             | <div id="disqus_thread"></div>
             | <script>
             | var disqus_config = function () {
-            |   this.page.url = "http://www.relentless-development.com/#{markdownInclude}.html";
+            |   this.page.url = "#{host}/#{markdownInclude}.html";
             |   this.page.identifier = "#{markdownInclude}";
             | };
             | 
@@ -55,7 +56,7 @@ mixin post(post, markdownInclude, isView, active)
             nav.post-nav 
               button.open.fa.fa-info(title="information").tooltip.up
               ul.scroll-status
-              a(class="clipboard" title="copy link" data-clipboard-text="#{host}/#{postPath}").tooltip.up.copy-link.fa.fa-link
+              button(title="copy link" data-clipboard-text="#{host}/#{postPath}").clipboard.tooltip.up.copy-link.fa.fa-link
                 
             .post-footer-content
               h3.headline-sub= post.title
