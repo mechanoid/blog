@@ -43,6 +43,17 @@ xhero-banner-bg = pearl-black
   .brand.in-hero-banner
     display none
 
+.js
+  .brand.in-hero-banner
+    +desktop()
+      color #fff
+      top 1rem
+      left 1rem
+      text-align left
+
+      .brand-subline
+        display none
+        
 +mq_highres()
   .js .rlb .hero-banner
       position fixed
@@ -73,15 +84,7 @@ xhero-banner-bg = pearl-black
           +tablet()
             font-size 5vw
 
-      .brand.in-hero-banner
-        +desktop()
-          color #fff
-          top 1rem
-          left 1rem
-          text-align left
 
-          .brand-subline
-            display none
 
 
 
