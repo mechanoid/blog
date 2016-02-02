@@ -100,6 +100,11 @@ gulp.task('templates', ['article-pages'], function() {
 
 gulp.task('images', function() {
   return gulp.src(['./assets/images/**/*'])
+    .pipe(gulp.dest(assetPath + '/images'));
+});
+
+gulp.task('optimized-images', function() {
+  return gulp.src(['./assets/images/**/*'])
 		.pipe(imageop({
 	    optimizationLevel: 5,
 	    progressive: true,
@@ -215,7 +220,7 @@ gulp.task('build', function(cb) {
 })
 
 gulp.task('build-release', function(cb) {
-	return gulpSequence('clean', 'post-include-mixins', 'asset-revisioning', 'gzip', 'enable-prod-env', 'templates', 'disable-prod-env', 'images', 'copy-cname', 'rss', 'sitemap')(cb);
+	return gulpSequence('clean', 'post-include-mixins', 'asset-revisioning', 'gzip', 'enable-prod-env', 'templates', 'disable-prod-env', 'optimized-images', 'copy-cname', 'rss', 'sitemap')(cb);
 })
 
 gulp.task('default', ['build']);
