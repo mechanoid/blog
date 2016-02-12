@@ -6,7 +6,14 @@ include ../helper/nav.jade
 extends ./frame.jade
 
 block body
-  block content
+  +main-nav(markdownInclude)
+  main.rlb-content
+    +brand-name()
+    
+    section.posts
+      section.post-view
+
+        block content
     
 
   include footer.jade

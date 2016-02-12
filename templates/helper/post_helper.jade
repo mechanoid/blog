@@ -8,64 +8,57 @@ mixin post(post, markdownInclude, isView, active)
   - activeClass = active ? "active" : "not-active"
   - category = post.category || "software development"
   - host = "http://www.relentless-development.com"
-  
-  +brand-name()
-  +main-nav(markdownInclude)
-  
-  main.rlb-content
-    section.posts
-      section.post-view
 
-        article.post(id=markdownInclude, class=activeClass)
-          header
-            a(href="/#{markdownInclude}.html")
-              h1.headline-primary= post.title
-            
-            p.post-meta(title=post.title)
-              span.post-category= category
-              |  • 
-              span.post-date= longDate
-              span.post-author by Falk Hoppe
+  article.post(id=markdownInclude)
+    header
+      a(href="/#{markdownInclude}.html")
+        h1.headline-primary= post.title
+      
+      p.post-meta(title=post.title)
+        span.post-category= category
+        |  • 
+        span.post-date= longDate
+        span.post-author by Falk Hoppe
+        
+        
+    h2.headline-sub.post-tldr-headline #tl;dr
+    p.post-tldr= post.tldr
+    .markdown-container
+      
+      +#{markdownInclude}
+      
+    if isView
+      | <div id="disqus_thread"></div>
+      | <script>
+      | var disqus_config = function () {
+      |   this.page.url = "#{host}/#{markdownInclude}.html";
+      |   this.page.identifier = "#{markdownInclude}";
+      | };
+      | 
+      | (function() { // DON'T EDIT BELOW THIS LINE
+      | var d = document, s = d.createElement('script');
+      | s.src = '//relentlessdevelopment.disqus.com/embed.js';
+      | s.setAttribute('data-timestamp', +new Date());
+      | (d.head || d.body).appendChild(s);
+      | })();
+      | </script>
+      | <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+          
+      
+    footer.post-footer
+      nav.post-nav 
+        button.open.fa.fa-info(title="information").tooltip.up
+        ul.scroll-status
+        button(title="copy link" data-clipboard-target=".copy-link-text").clipboard.tooltip.up.copy-link.fa.fa-link
+        .copy-link-tooltip
+          button.close-tooltip.fa.fa-close
+          span.copy-link-hint copy
+          input.copy-link-text(type="text" value="#{host}/#{postPath}")
               
-              
-          h2.headline-sub.post-tldr-headline #tl;dr
-          p.post-tldr= post.tldr
-          .markdown-container
-            
-            +#{markdownInclude}
-            
-          if isView
-            | <div id="disqus_thread"></div>
-            | <script>
-            | var disqus_config = function () {
-            |   this.page.url = "#{host}/#{markdownInclude}.html";
-            |   this.page.identifier = "#{markdownInclude}";
-            | };
-            | 
-            | (function() { // DON'T EDIT BELOW THIS LINE
-            | var d = document, s = d.createElement('script');
-            | s.src = '//relentlessdevelopment.disqus.com/embed.js';
-            | s.setAttribute('data-timestamp', +new Date());
-            | (d.head || d.body).appendChild(s);
-            | })();
-            | </script>
-            | <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
-                
-            
-          footer.post-footer
-            nav.post-nav 
-              button.open.fa.fa-info(title="information").tooltip.up
-              ul.scroll-status
-              button(title="copy link" data-clipboard-target=".copy-link-text").clipboard.tooltip.up.copy-link.fa.fa-link
-              .copy-link-tooltip
-                button.close-tooltip.fa.fa-close
-                span.copy-link-hint copy
-                input.copy-link-text(type="text" value="#{host}/#{postPath}")
-                    
-            .post-footer-content
-              h3.headline-sub= post.title
-              
-              span.post-date= shortDate 
-              |  // 
-              span.post-category= category
-              
+      .post-footer-content
+        h3.headline-sub= post.title
+        
+        span.post-date= shortDate 
+        |  // 
+        span.post-category= category
+        

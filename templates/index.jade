@@ -1,6 +1,7 @@
 extends ./layouts/posts.jade
 
 block content
+
   +article-data
     each post, id in ctx
       - first = Object.keys(ctx)[0] === id ? true : false
