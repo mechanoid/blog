@@ -1,5 +1,4 @@
-.tooltip
-  &:hover:after
+.tooltip:hover:after, .copy-link-tooltip
     content attr(title)
     white-space nowrap
     z-index 9999
@@ -13,7 +12,7 @@
     font-size .6rem
     border-radius 3px
 
-
+.tooltip
   &.left:hover:after, &.right:hover:after
     top 50%
     transform translateY(-30%)
@@ -34,3 +33,43 @@
 
   &.up:hover:after
     bottom 100%
+
+
+.copy-link-tooltip
+  position absolute
+  bottom 90%
+  right -1000%
+  padding .3rem 2.2rem .5rem .5rem
+
+
+  &.active
+    max-width 100%
+    right 0
+
+.copy-link-hint
+  display block
+  text-align left
+  margin-bottom .3rem
+
+.copy-link-text
+  max-width 100%
+  border none
+  padding .3rem .6rem
+  border-radius 2px
+  font-size 1rem
+
+.close-tooltip
+  background-color transparent
+  border none
+  position absolute
+  right .6rem
+  top 50%
+  transform translateY(-50%)
+  color #fff
+  outline none
+
+  .finished &
+    // animation: pulse 0.2s linear 1;
+
+    &:before
+      content: '\f00c';

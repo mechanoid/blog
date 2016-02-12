@@ -53,36 +53,37 @@ xhero-banner-bg = pearl-black
 
       .brand-subline
         display none
-        
-+mq_highres()
-  .js .rlb .hero-banner
-      position fixed
-      top 0
-      right 0
-      bottom 0
+
+// +mq_highres()
+.js .rlb .hero-banner
+    position fixed
+    top 0
+    right 0
+    bottom 0
+    left 0
+    // height 100%
+
+    z-index -1
+
+    .hero-banner-message
+      position absolute
       left 0
+      right 0
+      bottom 5%
 
-      z-index -1
+      +tablet()
+        left 10%
+        right 10%
 
-      .hero-banner-message
-        position absolute
-        left 0
-        right 0
-        bottom 5%
+      +desktop()
+        left 10%
+        right 10%
+
+      .headline-primary
+        font-size 3vw
 
         +tablet()
-          left 10%
-          right 10%
-
-        +desktop()
-          left 10%
-          right 10%
-
-        .headline-primary
-          font-size 3vw
-
-          +tablet()
-            font-size 5vw
+          font-size 5vw
 
 
 

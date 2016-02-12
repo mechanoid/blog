@@ -56,8 +56,12 @@ mixin post(post, markdownInclude, isView, active)
             nav.post-nav 
               button.open.fa.fa-info(title="information").tooltip.up
               ul.scroll-status
-              button(title="copy link" data-clipboard-text="#{host}/#{postPath}").clipboard.tooltip.up.copy-link.fa.fa-link
-                
+              button(title="copy link" data-clipboard-target=".copy-link-text").clipboard.tooltip.up.copy-link.fa.fa-link
+              .copy-link-tooltip
+                button.close-tooltip.fa.fa-close
+                span.copy-link-hint copy
+                input.copy-link-text(type="text" value="#{host}/#{postPath}")
+                    
             .post-footer-content
               h3.headline-sub= post.title
               

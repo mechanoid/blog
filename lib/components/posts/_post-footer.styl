@@ -55,11 +55,15 @@
     .open, .copy-link
       display block
       position absolute
-      top .5rem
-      transform: translateY(20%);
+      top 50%
+      transform: translateY(-20%);
+
+      &:active
+        animation: pulse 0.2s linear 1;
+
 
     .open
-      left 1rem
+      left 0
 
 
       &.tooltip.up:hover:after
@@ -70,8 +74,8 @@
 
 
     .copy-link
-      right 1rem
-      transform: translateY(30%);
+      right 0
+      transform: translateY(-20%);
       &:hover
         text-decoration none
 
