@@ -1,0 +1,14 @@
+#!/bin/bash
+
+source $(which iawriter-root-folder)
+echo "update repository files with icloud content"
+# cp
+
+
+export POSTS=$(ls ./posts)
+
+for p in $POSTS
+do
+ echo "copying \"$ICLOUD_IA_WRITER_ROOT$p\" to \"./posts/$p\""
+ cp "$ICLOUD_IA_WRITER_ROOT$p" "./posts/$p"
+done
