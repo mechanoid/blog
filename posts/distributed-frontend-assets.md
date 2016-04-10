@@ -9,26 +9,26 @@ category: frontend architecture
 tldr:
 ---
 
-In recent projects i noticed some interesting parts about frontend development that emerge from the circumstance of app development in a distributed services environment.
+In recent projects I noticed some interesting parts about frontend development that emerge from the circumstance of app development in a distributed services environment.
 
-The setting is mainly the same, just take some micro services or a little bit bigger services, like [SCS](http://scs-architecture.org). For example you may imagine an ecommerce platform with several small services, one delivering the main page and its content, one serving the user registration and signup and one that handles the orders coming in from our customers.
+The setting is mainly the same, just take some micro services or a little bit bigger services, like [SCS](http://scs-architecture.org). For example you may imagine an e-commerce platform with several small services, one delivering the main page and its content, one serving the user registration and signup and one that handles the orders coming in from our customers.
 
-Because your apps are part of an integrated system it is usually a good decision to say that the application while presenting individual business cases should share a common look and feel too. With this requirement in place there are mainly three different approaches of how to integrate the services in the front end.
+Because your apps are part of an integrated system it is usually a good decision to say that the application while presenting individual business cases should share a common look and feel too. With this requirement in place there are mainly three different approaches of how to integrate the services in the frontend.
 
 **no integration - don't share, rebuild!**
 
-The "easiest" approach and for sure the one with the biggest effort, at least when it comes to a certain complexity, is to build a common look in each application itself. This is mainly done by just taking a central styleguide which specifies the goal, but not sharing a line of code to retrieve the same results.
+The "easiest" approach and for sure the one with the biggest effort, at least when it comes to a certain complexity, is to build a common look in each application itself. This is mainly done by just taking a central style guide which specifies the goal, but not sharing a line of code to retrieve the same results.
 
 This approach is for example often the only choice when different technologies are used to create the same look and feel, just think about a native app and a web app. But while there are cases where you have no choice to properly integrate your apps, we usually want to have a more [DRY](https://en.wikipedia.org/wiki/Don't_repeat_yourself) way for building our frontend code.
 
-So usually we end up using a different more centralized approach. Instead of building a styleguide, that just tells people how the services should look like it is a much better idea to build a centralized pattern library that is shipped along with the styleguide.
+So usually we end up using a different more centralized approach. Instead of building a style guide, that just tells people how the services should look like it is a much better idea to build a centralized pattern library that is shipped along with the style guide.
 
 Ok, we have the requirement of all applications should share the same look and feel, so we have build a central library that ships all common frontend components. Aren't we done yet?
 Not really, now that we have decided for a centralized solution we have to decide how the response of an incoming web request is equipped with our styles and scripts.
 
-**push integration - alle the same, immediately**
+**push integration - all the same, immediately**
 
-In most projects there is one requirement that sneaks in together with others side by side. If you ask some people about that requirement most people cannot even answer who brought it in. It is the requirement, that all services should look the same, all the time. If i change and deploy the color of a link inside the central library, the font-size of a headline or similar, each service should receive those changes immediately at runtime without extra deployments.
+In most projects there is one requirement that sneaks in together with others side by side. If you ask some people about that requirement most people cannot even answer who brought it in. It is the requirement, that all services should look the same, all the time. If I change and deploy the color of a link inside the central library, the font-size of a headline or similar, each service should receive those changes immediately at runtime without extra deployments.
 
 The ability of providing assets to services, updating all of them at the same time can be achieved with different techniques and in my opinion each of them has its certain drawbacks. But in general  it comes down to "you are changing the state of the deployed service at run time and violate its independency". So a team which builds and runs the service is no longer in full responsibility alone if it comes to erroneous behavior in production.  
 
@@ -45,14 +45,14 @@ Whether your assets in a given version are physically bundled into the build art
 
 Imagine your assets for example provided as npm-package, gem, webjar or whatever and you have to rebuild your application to resolve to the next asset version.
 
-This approach of handling asset resolution has for sure its drawbacks too. At first you have to re-deploy an application to let it shine in a new frontend version. But maybe more important is the fact that apps are by defintion out of sync now.
+This approach of handling asset resolution has for sure its drawbacks too. At first you have to re-deploy an application to let it shine in a new frontend version. But maybe more important is the fact that apps are by definition out of sync now.
 
 The main advantage which makes this approach my personal favorite is, that deciding for a determined asset version in the build step means that it becomes tested together with any changes made in the service itself. So a team developing a service is able to decide if it can ship the next asset version without breaking any functionality. So responsibility is back where it belongs to.
 
 
 ## Asset-changes as distributed data
 
-Ok, now that we made it through the ground work, lets talk about the funny things. The one or the other may have noticed the thing  that i really want to talk about.
+Ok, now that we made it through the ground work, lets talk about the funny things. The one or the other may have noticed the thing  that I really want to talk about.
 
 If we look at new asset versions in a little bit different way we can see a similarity to a different software principle in the area of distributed systems. Lets take the changeset included in an asset release and assume its just data we publish to a distributed storage. Once the data is deployed to a storage entity (our service) the data becomes available/visible to a user in his next request.
 
@@ -60,19 +60,19 @@ When we look at our asset deployment like that we can see that the [CAP theorem]
 
 CAP an acronym for Consistency, Availability and Partition tolerance says that if you want to store data in different locations you have to choose two of those properties and you will have lack of the third. (For further information about the theory itself, please have a look at the various articles explaining how the CAP Theorem works exactly, because that would go far beyond the horizon of this article)
 
-To get a hint about what that tells us about our asset distribution lets talk about the CAP properties and what they mean for our usecase.
+To get a hint about what that tells us about our asset distribution lets talk about the CAP properties and what they mean for our use case.
 
 ## Consistency
 
-Consistency is a property that has the biggest awareness amongst frontend developers and designers. It is easily explained by considering a very practical example. Lets assume that our services each include a brand logo at the top of their starting pages. A new asset release now includes an updated graphic for that image. The services are consistent if they provide the same version of that file to new page requests. So this property describes the uniformity in look and feel of our services.
+Consistency is a property that has usually the biggest awareness amongst frontend developers and designers. It is easily explained by considering a very practical example. Lets assume that our services each include a brand logo at the top of their starting pages. A new asset release now includes an updated graphic for that image. The services are consistent if they provide the same version of that file to new page requests. So this property describes the uniformity in look and feel of our services.
 
 ## Availability
 
-Availability is dedicated to the question of "is the service able to deliver some asset version". So applied to our logo example, do our services have access to the versions of our logo, (not necessarily the same).
+Availability is dedicated to the question of "is the service able to deliver some asset version". So applied to our logo example, do our services have access to the versions of our logo, (not necessarily the same) and are the services able to deliver it to a request without errors.
 
 ## Partition Tolerance
 
-Partition Tolerance is about the possibility to distribute our asset data to different services. So is it possible to centralize our asset data and share it between our services.
+Partition Tolerance is all about the possibility to distribute our asset data to different services while centralizing or sharing the data itself. So is it possible to centralize our asset data and share it between our services.
 
 ## Integration variants and CAP
 
@@ -90,7 +90,7 @@ That scenario seems pretty bad for most occasions like building an e-commerce sy
 
 At next we defined a scenario where new asset versions are deployed centrally once and become applied to our services in parallel and immediate.
 
-This means that in this approach the strongest feature is for sure **consistency** by sharing our code between services so as a result we decided for **partition tolerance** as well. Up from the moment we deploy a new style or js functionality or something like that we "push" it into each service and force new requests to that services to deliver the updated version. So changes are visible immediately and the services deliver a consistent look and feel all the time.
+This means that in this approach the strongest feature is for sure **consistency** by sharing our code between services so as a result we decided for **partition tolerance** as well. Up from the moment we deploy a new style or js-functionality or something like that we "push" it into each service and force new requests to that services to deliver the updated version. So changes are visible immediately and the services deliver a consistent look and feel all the time.
 
 The problem in this distribution scenario lies in the strict coupling of our services now. Each central asset deployment delivers code that is able to corrupt a service at runtime. Not more or less. So availability becomes a major issue in this system.
 
@@ -102,7 +102,7 @@ By integrating assets (or the referencing them) in our services at build time we
 
 So yes our systems will be out of sync from time to time, but therefore we achieve a greater robustness to errors in the distribution process. A new assets version can be tested in our build pipeline and will not change its behavior once it is deployed.
 
-## summary
+## Summary
 
 In this article I don't want to judge any of these strategies at all, it is more about clarifying that our asset deployment is equipped with the properties we decide for.
 
