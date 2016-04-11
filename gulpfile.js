@@ -170,7 +170,7 @@ gulp.task('rss', function() {
 		title: 'Relentless Development',
 		site_url: 'http://www.relentless-development.com/',
 		feed_url: 'http://www.relentless-development.com/feed.xml',
-		description: 'relentless thoughts on software development, software architecture and related stuff',
+		description: 'some thoughts on software development, software architecture and related stuff',
 		webMaster: 'falkhoppe81@gmail.com (Falk Hoppe)',
 		language: 'en' });
 
