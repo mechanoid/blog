@@ -11,7 +11,7 @@ tldr:
 
 In recent projects I noticed some interesting parts about frontend development that emerge from the circumstance of app development in a distributed services environment.
 
-The setting is mainly the same, just take some micro services or a little bit bigger services, like [SCS](http://scs-architecture.org). For example you may imagine an e-commerce platform with several small services, one delivering the main page and its content, one serving the user registration and signup and one that handles the orders coming in from our customers.
+A distributed service environment in this case means, that we have a few applications that provide frontends based on modern web technologies. Whether we are talking about micro services or larger systems like [SCS](http://scs-architecture.org) doesn't matter here. For example lets imagine an e-commerce platform with several small services, one delivering the main page and its content, one serving the user registration and signup and one that handles the orders coming in from our customers.
 
 Because your apps are part of an integrated system it is usually a good decision to say that the application while presenting individual business cases should share a common look and feel too. With this requirement in place there are mainly three different approaches of how to integrate the services in the frontend.
 
