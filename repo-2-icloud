@@ -1,9 +1,7 @@
 #!/bin/bash
 
-source $(which icloud-iawriter-folder)
+source $(which iawriter-root-folder)
 echo "update repository files with icloud content"
-# cp
-
 
 export POSTS=$(ls ./posts)
 
