@@ -6,12 +6,12 @@ author:
 title: Distributed Frontend Assets
 date: 2016-04-09
 category: frontend architecture
-tldr:
+tldr: In my opinion there is a certain similarity between centralized asset deployment to distributed services and distribution of data to decentralized storages. In consequence of that some rules of data distribution may be applicable to the field of asset distribution. In this post I concentrate on a relationship between how to integrate centralized assets and Eric Brewers CAP theorem.
 ---
 
 In recent projects I noticed some interesting parts about frontend development that emerge from the circumstance of app development in a distributed services environment.
 
-A distributed service environment in this case means, that we have a few applications that provide frontends based on modern web technologies. Whether we are talking about micro services or larger systems like [SCS](http://scs-architecture.org) doesn't matter here. For example lets imagine an e-commerce platform with several small services, one delivering the main page and its content, one serving the user registration and signup and one that handles the orders coming in from our customers.
+A distributed service environment in this case means, that we have a few applications that provide frontends based on modern web technologies. Whether we are talking about micro services or larger systems like [SCS](http://scs-architecture.org) doesn't matter here. More important is the fact, that we have different services that should look more or less similar to a visitor. For example lets imagine an e-commerce platform with several small services, one delivering the main page and its content, one serving the user registration and signup and one that handles the orders coming in from our customers.
 
 Because your apps are part of an integrated system it is usually a good decision to say that the application while presenting individual business cases should share a common look and feel too. With this requirement in place there are mainly three different approaches of how to integrate the services in the frontend.
 
